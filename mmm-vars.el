@@ -145,6 +145,7 @@
     (c-extra-toplevel-key nil ,mmm-c-derived-modes)
     (c-inexpr-class-key nil ,mmm-c-derived-modes)
     (c-conditional-key nil ,mmm-c-derived-modes)
+    (nxml-prolog-end region (nxml-mode))
     semantic-bovinate-toplevel-override
     semantic-toplevel-bovine-table
     ;; Indentation style control variables.
@@ -183,6 +184,7 @@
 	 c-comment-prefix-regexp
 	 c-comment-start-regexp
 	 c-cpp-defined-fns
+         c-cpp-expr-functions-key
 	 c-current-comment-prefix
 	 c-decl-block-key
          c-decl-hangon-key
@@ -192,9 +194,11 @@
          c-decl-start-kwds
          c-decl-start-re
 	 c-doc-comment-start-regexp
+         ;; c-enum-clause-introduction-re
 	 c-expr-kwds
 	 c-file-offsets
 	 c-file-style
+         c-found-types
          c-not-primitive-type-keywords-regexp
 	 c-hanging-braces-alist
 	 c-hanging-colons-alist
@@ -222,6 +226,9 @@
 	 c-lambda-kwds
          c-literal-start-regexp
 	 c-macro-with-semi-re
+         c-make-top-level-key
+         ;; c-make-top-level-kwds
+         c-noise-macro-with-parens-name-re
          c-nonlabel-token-key
          c-nonlabel-token-2-key
          c-nonsymbol-chars
@@ -255,6 +262,7 @@
 	 c-other-decl-block-kwds
 	 c-other-decl-kwds
 	 c-overloadable-operators-regexp
+         c-pack-key
          c-paragraph-separate
          c-paragraph-start
          c-paren-stmt-key
@@ -288,6 +296,7 @@
          c-prefix-spec-kwds-re
          c-typedef-key
 	 c-typedef-decl-key
+         c-type-decl-suffix-ws-ids-key
          comment-end
          comment-start
 	 comment-start-skip))
@@ -295,6 +304,10 @@
        (lambda (var) (list var nil '(js-mode)))
        '(js--quick-match-re
          js--quick-match-re-func))
+    ,@(mapcar
+       (lambda (var) (list var nil '(typescript-mode)))
+       '(typescript--quick-match-re
+         typescript--quick-match-re-func))
     ;; Skeleton insertion
     skeleton-transformation
     ;; Abbrev mode
